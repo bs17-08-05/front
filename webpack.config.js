@@ -8,7 +8,7 @@ module.exports = {
     './src/js/main.js'
   ],
   output: {
-    path: __dirname + '/dist/js/',
+    path: __dirname + '/dist/static/main/js/',
     filename: 'bundle.js',
   },
   module: {
