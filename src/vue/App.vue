@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div>
    
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
@@ -37,6 +38,11 @@
 
     <order-page></order-page>
 
+=======
+  <div class="container">
+    <horecama-list-component v-if="state == 0"></horecama-list-component>
+    <goods-list-component v-if="state == 1"></goods-list-component>
+>>>>>>> dev
   </div>
 </template>
 
@@ -44,6 +50,7 @@
 </style>
 
 <script>
+<<<<<<< HEAD
 export default {
   data() {
     return {
@@ -59,3 +66,21 @@ export default {
   }
 };
 </script>
+=======
+import HorecamaListComponent from "./HorecamaListComponent.vue";
+import GoodsListComponent from "./GoodsListComponent.vue";
+export default {
+  components: {
+    "horecama-list-component": HorecamaListComponent,
+    "goods-list-component": GoodsListComponent
+  },
+  data: function() {
+    return {
+      state: 0,
+      horecama_id: 0
+    };
+  }
+};
+</script>
+
+>>>>>>> dev
