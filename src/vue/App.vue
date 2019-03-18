@@ -1,11 +1,12 @@
 <template>
-  <div class="main">
+  <div class="container">
     <horecama-list-component v-if="state == 0"></horecama-list-component>
     <goods-list-component v-if="state == 1"></goods-list-component>
   </div>
 </template>
 
 <style>
+
 </style>
 
 <script>

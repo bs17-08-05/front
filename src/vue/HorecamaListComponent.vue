@@ -3,7 +3,7 @@
     <li v-for="item in horecamas" class="horecama">
       <a @click="view_menu(item.pk)">
         <div class="horecama_img">
-          <img :src="item.photo" :alt="item.name">
+          <img :src="item.photo_url" :alt="item.name" class='list-img'>
         </div>
       </a>
 
@@ -34,12 +34,17 @@
 #list {
   width: 100%;
 }
+.list-img {
+    width: 100%;
+    height: 100%;
+}
 .horecama_img {
   background-color: #8ea4ff;
   height: 60%;
   width: 100%;
   border-radius: 7px;
   margin-bottom: 0.5em;
+  text-align: center;
 }
 .horecama_name {
   display: inline-block;
@@ -90,7 +95,7 @@ export default {
   data() {
     return {
       api_url: "/api/horecama/",
-      horecamas: [{'type': 'R', 'pk': 1, 'name': 'UUU', 'description': 'UUUUUU', 'photo': null, 'address':'test'}]
+      horecamas: [{'type': 'R', 'pk': 1, 'name': 'UUU', 'description': 'UUUUUU', 'photo_url': null, 'address':'test'}]
     };
   },
 
