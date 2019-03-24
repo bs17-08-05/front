@@ -20,7 +20,8 @@ export default {
   data: function() {
     return {
       state: 0,
-      horecama_id: 0
+      horecama_id: 0,
+      configs: this.$parent.configs,
     };
   }
 };

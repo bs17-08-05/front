@@ -93,8 +93,10 @@ a:active {
 <script>
 export default {
   data() {
+    let configs = this.$parent.configs; 
     return {
-      api_url: "/api/goods/" + this.$parent.horecama_id + "/",
+      api_url: configs.BACKEND_URL + "/api/goods/" + this.$parent.horecama_id + "/",
+      configs: configs,
       goods: [
         { id: 1, photo_url: null, price: 12, description: "test", name: "hui" }
       ]

@@ -3,7 +3,7 @@
     <li v-for="item in horecamas" class="horecama">
       <a @click="view_menu(item.pk)">
         <div class="horecama_img">
-          <img :src="item.photo_url" :alt="item.name" class='list-img'>
+          <img :src="configs.BACKEND_URL + item.photo_url" :alt="item.name" class='list-img'>
         </div>
       </a>
 
@@ -93,14 +93,17 @@ a:active {
 <script>
 export default {
   data() {
+    let configs = this.$parent.configs;
     return {
-      api_url: "/api/horecama/",
+      api_url: configs.BACKEND_URL + "/api/horecama/",
+      configs: configs,
       horecamas: [{'type': 'R', 'pk': 1, 'name': 'UUU', 'description': 'UUUUUU', 'photo_url': null, 'address':'test'}]
     };
   },
 
   methods: {
     getAllHorecama: function() {
+      console.log(this.api_url);
       this.$http.get(this.api_url).then(
         function(response) {
           console.log(response);
