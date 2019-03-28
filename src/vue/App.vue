@@ -1,86 +1,82 @@
 <template>
-<<<<<<< HEAD
   <div>
-   
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-      <a href="#" class="navbar-brand">
-        <img src="http://innopolis.ru/local/styles/img/logo.svg" width="50" height="50" alt="logo">
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedControl"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a href="#" class="nav-link">InnoEats</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Restoraunts</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">About</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input type="text" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0 rounded-top">Search</button>
-        </form>
-      </div>
-    </nav>
+    <v-toolbar flat color="white">
+      <v-toolbar-title>
+        <v-btn flat>InnoEats</v-btn>
+      </v-toolbar-title>
 
-    <order-page></order-page>
+      <v-spacer></v-spacer>
 
-=======
-  <div class="container">
-    <horecama-list-component v-if="state == 0"></horecama-list-component>
-    <goods-list-component v-if="state == 1"></goods-list-component>
->>>>>>> dev
+      <v-btn flat>Restoraunts</v-btn>
+
+      <v-btn icon>
+        <v-icon>search</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>shopping_cart</v-icon>
+      </v-btn>
+
+      <v-btn flat>Sign In</v-btn>
+    </v-toolbar>
+
+    <v-expansion-panel style="display: none" id="cart">
+      <v-expansion-panel-content expand-icon="mdi-menu-down">
+        <template v-slot:header>
+          <div>Cart</div>
+        </template>
+        <v-card>
+          <v-card-text v-for="(item,index) in cart" :key="index" class="grey lighten-3">
+            <div class="title">{{item.name}}</div>
+            <div class="subheading">{{item.price}}</div>
+            <div class="body-1">{{item.id}}</div>
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+
+    <div class="container">
+      <main-page v-if="state == 0"></main-page>
+      <goods-page v-if="state == 1"></goods-page>
+      <order-page v-if="state == 2"></order-page>
+    </div>
   </div>
 </template>
 
 <style>
+.v-icon .v-btn {
+  color: #333;
+}
+.v-toolbar-title {
+  color: #333;
+}
 </style>
 
 <script>
-<<<<<<< HEAD
+import MainPage from "./components/MainPage.vue";
+import GoodsList from "./components/GoodsList.vue";
+import Order from "./components/Order.vue";
+
 export default {
-  data() {
+  components: {
+    "main-page": MainPage,
+    "goods-page": GoodsList,
+    "order-page": Order
+  },
+  data: function() {
     return {
-      order : [ {
-        id: " HUI ",
-        photo_url: "url",
-        price: "999",
-        description: "Neehooja",
-        name: "EBAT"
-      }
+      state: 0,
+      horecama_id: 0,
+      order: [
+        {
+          id: " 123 ",
+          photo_url: "url",
+          price: "350rub",
+          description: "Lorem ipsum dolor sit amet ",
+          name: "Pizza"
+        }
       ]
     };
   }
 };
 </script>
-=======
-import HorecamaListComponent from "./HorecamaListComponent.vue";
-import GoodsListComponent from "./GoodsListComponent.vue";
-export default {
-  components: {
-    "horecama-list-component": HorecamaListComponent,
-    "goods-list-component": GoodsListComponent
-  },
-  data: function() {
-    return {
-      state: 0,
-      horecama_id: 0
-    };
-  }
-};
-</script>
-
->>>>>>> dev
