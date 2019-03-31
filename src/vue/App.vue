@@ -75,7 +75,8 @@ export default {
           description: "Lorem ipsum dolor sit amet ",
           name: "Pizza"
         }
-      ]
+      ],
+      configs: this.$parent.configs,
     };
   }
 };
