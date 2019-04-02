@@ -1,20 +1,5 @@
 <template>
   <div>
-    <v-expansion-panel style="display: none" id="cart">
-      <v-expansion-panel-content expand-icon="mdi-menu-down">
-        <template v-slot:header>
-          <div>Cart</div>
-        </template>
-        <v-card>
-          <v-card-text v-for="(item,index) in cart" :key="index" class="grey lighten-3">
-            <div class="title">{{item.name}}</div>
-            <div class="subheading">{{item.price}}</div>
-            <div class="body-1">{{item.id}}</div>
-          </v-card-text>
-        </v-card>
-      </v-expansion-panel-content>
-    </v-expansion-panel>
-
     <v-layout>
       <v-flex v-for="(item,index) in goods" v-bind:key="index" xs12 sm4 offset-sm1>
         <v-card>

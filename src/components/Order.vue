@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout align-center justify-center row fill-height>
     <v-flex>
       <v-card style="width: 50rem; min-height: 30rem; overflow:auto;">
         <v-card-title primary-title>
@@ -41,6 +41,7 @@
 <script>
 import axios from "axios";
 export default {
+  name: 'Order',
   methods: {
     onClick: function() {
       console.log(axios);
