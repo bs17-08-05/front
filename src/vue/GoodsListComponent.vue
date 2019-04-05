@@ -1,6 +1,7 @@
 <template>
   <div>
     <button class="btn btn-info" @click="back">Back</button>
+    <button class="btn btn-info" @click="goto_feedbacks">Feedbacks</button>
     <ul id="list">
       <li v-for="item in goods" class="goods">
         <a @click="buyButton(item.id)">
@@ -47,11 +48,6 @@
   text-align: center;
 }
 .goods_name {
-  display: inline-block;
-  font-weight: bold;
-  font-size: 20px;
-}
-.goods_type {
   display: inline-block;
   font-weight: bold;
   font-size: 20px;
@@ -113,6 +109,7 @@ export default {
         },
         function(error) {
           console.log(response);
+          console.log(error);
           //error
         }
       );
@@ -123,7 +120,10 @@ export default {
     buyButton: function(id) {
       this.$parent.state = 2;
       this.$parent.good = id;
-    }
+    },
+    goto_feedbacks: function() {
+      this.$parent.state = 3;
+    },
   },
   created: function() {
     this.getAllGoods();
