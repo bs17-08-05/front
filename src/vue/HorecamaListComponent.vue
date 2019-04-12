@@ -3,7 +3,7 @@
     <li v-for="item in horecamas" class="horecama">
       <a @click="view_menu(item.pk)">
         <div class="horecama_img">
-          <img :src="configs.BACKEND_URL + item.photo_url" :alt="item.name" class='list-img'>
+          <img :src="back_url + item.photo_url" :alt="item.name" class='list-img'>
         </div>
       </a>
 
@@ -93,10 +93,9 @@ a:active {
 <script>
 export default {
   data() {
-    let configs = this.$parent.configs;
     return {
-      api_url: configs.BACKEND_URL + "/api/horecama/",
-      configs: configs,
+      api_url: this.$store.getters.getBackUrl + "/api/horecama/",
+      back_url: this.$store.getters.getBackUrl,
       horecamas: [{'type': 'R', 'pk': 1, 'name': 'UUU', 'description': 'UUUUUU', 'photo_url': null, 'address':'test'}]
     };
   },
@@ -106,7 +105,6 @@ export default {
       console.log(this.api_url);
       this.$http.get(this.api_url).then(
         function(response) {
-          console.log(response);
           this.horecamas = response.body.data;
         },
         function(error) {
@@ -115,8 +113,8 @@ export default {
       );
     },
     view_menu: function(id) {
-        this.$parent.state = 1;
-        this.$parent.horecama_id = id;
+      this.$store.commit('setView', 1);
+      this.$store.commit('setHorecamaId', id);
     }
   },
   created: function() {

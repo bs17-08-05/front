@@ -93,10 +93,10 @@ a:active {
 <script>
 export default {
   data() {
-    let configs = this.$parent.configs; 
+    let back_url = this.$store.getters.getBackUrl; 
+    console.log(this.$store.getters.getHorecamaId);
     return {
-      api_url: configs.BACKEND_URL + "/api/goods/" + this.$parent.horecama_id + "/",
-      configs: configs,
+      api_url: back_url + "/api/goods/" + this.$store.getters.getHorecamaId + "/",
       goods: [
         { id: 1, photo_url: null, price: 12, description: "test", name: "hui" }
       ]
@@ -105,7 +105,6 @@ export default {
 
   methods: {
     getAllGoods: function() {
-      console.log(this.$parent.horecama_id);
       this.$http.get(this.api_url).then(
         function(response) {
           console.log(response);
@@ -118,11 +117,11 @@ export default {
       );
     },
     back: function(id) {
-      this.$parent.state = 0;
+      this.$store.commit('setView', 0);
     },
     buyButton: function(id) {
-      this.$parent.state = 2;
-      this.$parent.good = id;
+      this.$store.commit('setView', 2);
+      this.$store.commit('setGoodId',id);
     }
   },
   created: function() {
