@@ -1,13 +1,19 @@
 import Vue from 'vue';
-import App from '../vue/App.vue';
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import configs from './config';
+import Vuetify from 'vuetify';
+import App from './App.vue';
+import configs from './js/config';
 
 import VueResource from 'vue-resource';
-import Vuex from 'vuex';
+import 'vuetify/dist/vuetify.min.css'
 
+import router from './router'
+
+import Vuex from 'vuex';App
+
+// import 'bootstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 Vue.use(VueResource);
+Vue.use(Vuetify);
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -48,6 +54,9 @@ const store = new Vuex.Store({
     getBackWsUrl: state => {
       return state.configs.BACKEND_WS;
     },
+    getMediaUrl: state => {
+      return state.configs.MEDIA_URL;
+    },
     getToken: state => {
       return state.token;
     },
@@ -68,4 +77,5 @@ new Vue({
   el: '#app',
   render: h => h(App),
   store,
+  router,
 });
