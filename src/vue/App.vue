@@ -44,6 +44,7 @@ import Signin from "./components/Signin.vue";
 import Signup from "./components/Signup.vue";
 import NotificationComponent from "./components/NotificationComponent.vue"
 import Order from './components/Order.vue'
+import HorecamaFeedbacks from './components/HorecamaFeedbacks.vue'
 
 export default {
   computed: {
@@ -57,6 +58,7 @@ export default {
     "signin-component": Signin,
     "signup-component": Signup,
     "notification-component": NotificationComponent,
+    "horecama-feedbacks-component": HorecamaFeedbacks,
   },
   created: function() {
     let sessionId = localStorage.getItem("sessionId");
