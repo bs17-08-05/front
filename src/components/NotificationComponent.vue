@@ -1,58 +1,21 @@
-<template><p>test</p></template>
-
-<style>
-</style>
+<template></template>
 
 <script>
 export default {
-  methods: {
-    sendNotification: function(title, options) {
-      // Проверим, поддерживает ли браузер HTML5 Notifications
-      if (!("Notification" in window)) {
-        alert(
-          "Ваш браузер не поддерживает HTML Notifications, его необходимо обновить."
-        );
-      }
-
-      // Проверим, есть ли права на отправку уведомлений
-      else if (Notification.permission === "granted") {
-        // Если права есть, отправим уведомление
-        var notification = new Notification(title, options);
-
-        function clickFunc() {
-          alert("Пользователь кликнул на уведомление");
-        }
-
-        notification.onclick = clickFunc;
-      }
-
-      // Если прав нет, пытаемся их получить
-      else if (Notification.permission !== "denied") {
-        Notification.requestPermission(function(permission) {
-          // Если права успешно получены, отправляем уведомление
-          if (permission === "granted") {
-            var notification = new Notification(title, options);
-          } else {
-            alert("Вы запретили показывать уведомления"); // Юзер отклонил наш запрос на показ уведомлений
-          }
-        });
-      } else {
-        // Пользователь ранее отклонил наш запрос на показ уведомлений
-        // В этом месте мы можем, но не будем его беспокоить. Уважайте решения своих пользователей.
-      }
-    }
-  },
   created: function() {
-    const socket = new WebSocket(this.$store.getters.getBackWsUrl + "/courier/notification");
+    const socket = new WebSocket(
+      this.$store.getters.getBackWsUrl + "/courier/notification"
+    );
 
-    // Connection opened
-    socket.addEventListener("open", function(event) {
-      socket.send("Courier notification!");
-    });
-
+    let vm = this;
     // Listen for messages
     socket.addEventListener("message", function(event) {
-      console.log(event.data)
+      vm.$notify({
+        group: "courier",
+        title: "New order",
+        text: event.data
+      });
+      console.log(event.data);
     });
   }
 };

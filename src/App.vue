@@ -1,5 +1,7 @@
 <template>
   <div>
+    <notifications group='courier' position='bottom right'/>
+    <notification-component></notification-component>
     <!-- Nav bar -->
     <v-toolbar flat color="white">
       <v-toolbar-title>

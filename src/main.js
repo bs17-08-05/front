@@ -4,6 +4,7 @@ import App from './App.vue';
 import configs from './js/config';
 
 import VueResource from 'vue-resource';
+import Notifications from 'vue-notification'
 import 'vuetify/dist/vuetify.min.css'
 
 import router from './router'
@@ -15,6 +16,7 @@ import Vuex from 'vuex';App
 Vue.use(VueResource);
 Vue.use(Vuetify);
 Vue.use(Vuex);
+Vue.use(Notifications)
 
 const store = new Vuex.Store({
   state: {
