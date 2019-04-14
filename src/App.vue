@@ -1,6 +1,6 @@
 <template>
   <div>
-    <notifications group='courier' position='bottom right'/>
+    <notifications group="courier" position="bottom right"/>
     <notification-component></notification-component>
     <!-- Nav bar -->
     <v-toolbar flat color="white">
@@ -17,40 +17,18 @@
       </v-btn>
       <router-link to="/cart">
         <v-btn icon>
-          <v-icon style="color: #388E3C">shopping_cart</v-icon>
+          <v-badge color="green">
+            <template v-slot:badge>
+              <span>{{itemsInCart}}</span>
+            </template>
+            <v-icon style="color: #388E3C">shopping_cart</v-icon>
+          </v-badge>
         </v-btn>
       </router-link>
-      <v-btn flat style="color: #388E3C">Sign In</v-btn>
+      <router-link to="/signin">
+        <v-btn flat style="color: #388E3C">Sign In</v-btn>
+      </router-link>
     </v-toolbar>
-    
-    <!-- Future cart -->
-    <v-list>
-      <v-list-group
-        v-for="item in items"
-        :key="item.title"
-        v-model="item.active"
-        :prepend-icon="item.action"
-        no-action
-      >
-        <template v-slot:activator>
-          <v-list-tile>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </template>
-
-        <v-list-tile v-for="subItem in item.items" :key="subItem.title" @click>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
-          </v-list-tile-content>
-
-          <v-list-tile-action>
-            <v-icon>{{ subItem.action }}</v-icon>
-          </v-list-tile-action>
-        </v-list-tile>
-      </v-list-group>
-    </v-list>
 
     <router-view></router-view>
   </div>
@@ -69,8 +47,9 @@ import Order from "./components/Order.vue";
 import NotFound from "./components/NotFound.vue";
 import Signin from "./components/Signin.vue";
 import Signup from "./components/Signup.vue";
-import NotificationComponent from "./components/NotificationComponent.vue"
-import HorecamaFeedbacks from './components/HorecamaFeedbacks.vue'
+import NotificationComponent from "./components/NotificationComponent.vue";
+import HorecamaFeedbacks from "./components/HorecamaFeedbacks.vue";
+import Cart from "./components/Cart.vue";
 
 export default {
   components: {
@@ -82,16 +61,19 @@ export default {
     "signup-component": Signup,
     "notification-component": NotificationComponent,
     "horecama-feedbacks-component": HorecamaFeedbacks,
+    "cart": Cart,
   },
   computed: {
     state() {
       return this.$store.getters.getView;
-    }
+    },
+    itemsInCart(){
+			let cart = this.$store.getters.cartProducts;
+			return cart.reduce((accum, item) => accum + item.quantity, 0)
+		}
   },
   data: function() {
-    return {
-        
-    };
+    return {};
   },
   created: function() {
     let sessionId = localStorage.getItem("sessionId");
@@ -102,7 +84,11 @@ export default {
         .then(
           response => {
             console.log(response.body);
-            this.$store.commit('setTokens', response.body.token, response.body.refresh_token);
+            this.$store.commit(
+              "setTokens",
+              response.body.token,
+              response.body.refresh_token
+            );
           },
           response => {
             console.log("test");

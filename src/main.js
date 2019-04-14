@@ -6,28 +6,53 @@ import configs from './js/config';
 import VueResource from 'vue-resource';
 import Notifications from 'vue-notification'
 import 'vuetify/dist/vuetify.min.css'
+import * as types from './mutation-types'
 
 import router from './router'
 
-import Vuex from 'vuex';App
+import Vuex from 'vuex';
+App
 
 // import 'bootstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 Vue.use(VueResource);
 Vue.use(Vuetify);
-Vue.use(Vuex);
+Vue.use(Vuex)
 Vue.use(Notifications)
 
 const store = new Vuex.Store({
   state: {
+    added: [],
     view: 0,
     configs: configs,
     token: "",
     refresh_token: "",
     horecamaId: 0,
     goodId: 0,
+    all:[
+      {
+        id: '',
+			name: '',
+			description: '',
+			price: 399
+      }
+    ]
   },
   mutations: {
+    [types.ADD_TO_CART](state, {
+      id
+    }) {
+      const record = state.added.find(p => p.id === id)
+
+      if (!record) {
+        state.added.push({
+          id,
+          quantity: 1
+        })
+      } else {
+        record.quantity++
+      }
+    },
     setView(state, view) {
       state.view = view;
     },
@@ -43,7 +68,32 @@ const store = new Vuex.Store({
     }
 
   },
+  actions: {
+    addToCart({
+      commit
+    }, product) {
+      commit(types.ADD_TO_CART, {
+        id: product.id
+      })
+    }
+  },
   getters: {
+    allProducts: state => state.all, // would need action/mutation if data fetched async
+    getNumberOfProducts: state => (state.all) ? state.all.length : 0,
+    cartProducts: state => {
+      return state.added.map(({
+        id,
+        quantity
+      }) => {
+        const product = state.all.find(p => p.id === id)
+
+        return {
+          name: product.name,
+          price: product.price,
+          quantity
+        }
+      })
+    },
     getView: state => {
       return state.view;
     },
@@ -71,7 +121,7 @@ const store = new Vuex.Store({
   }
 })
 
-Vue.http.interceptors.push(function(request) {
+Vue.http.interceptors.push(function (request) {
   request.headers.set('Authorization', 'Bearer ' + localStorage.getItem('token'));
 });
 

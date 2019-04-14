@@ -1,9 +1,14 @@
 <template>
   <div>
     <v-layout>
-      <v-flex v-for="(item,index) in goods" v-bind:key="index" xs12 sm4 offset-sm1>
+      <v-flex v-for="(item,index) in goods" v-bind:key="index" xs12 sm2 offset-sm1>
         <v-card>
-          <v-img class="white--text" height="200px" :src="photo_prefix + item.photo_url" :alt="item.name">
+          <v-img
+            class="white--text"
+            height="200px"
+            :src="photo_prefix + item.photo_url"
+            :alt="item.name"
+          >
             <v-container fill-height fluid>
               <v-layout fill-height>
                 <v-flex xs12 align-end flexbox>
@@ -26,7 +31,7 @@
               flat
               color="green darken-1"
               style="position: absolute;right: 3px;bottom: 15%;"
-              @click="buyButton(item.id)"
+              @click="addToCart(item)"
             >Add to cart</v-btn>
           </v-card-actions>
         </v-card>
@@ -37,6 +42,7 @@
 
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -69,32 +75,24 @@ export default {
       ]
     };
   },
-  methods: {
-    addToCart: function(aydi, cena, imya) {
-      document.getElementById("cart").style.display = "default";
-      this.cart.push({
-        id: aydi,
-        price: cena,
-        name: imya
-      });
-    },
-    getAllGoods: function() {
-      let back_url = this.$store.getters.getBackUrl;
-      this.$http.get(back_url + this.api_url).then(
-        function(response) {
-          this.goods = response.body.data;
-        },
-        function(error) {
-          console.log(response);
-          //error
-        }
-      );
-    },
-    buyButton: function(id) {
-      this.$parent.state = 2;
-      this.$parent.good = id;
-    }
+  computed: mapGetters({
+    products: "allProducts",
+    length: "getNumberOfProducts"
+  }),
+  methods: mapActions(["addToCart"]),
+  getAllGoods: function() {
+    let back_url = this.$store.getters.getBackUrl;
+    this.$http.get(back_url + this.api_url).then(
+      function(response) {
+        this.goods = response.body.data;
+      },
+      function(error) {
+        console.log(response);
+        //error
+      }
+    );
   },
+
   created: function() {
     this.getAllGoods();
   }
