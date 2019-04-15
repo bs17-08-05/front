@@ -29,23 +29,23 @@ const store = new Vuex.Store({
     refresh_token: "",
     horecamaId: 0,
     goodId: 0,
-    all:[
-      {
-        id: '',
-			name: '',
-			description: '',
-			price: 399
-      }
-    ]
+    all: [{
+      id: '',
+      name: '',
+      description: '',
+      price: 399
+    }]
   },
   mutations: {
     [types.ADD_TO_CART](state, {
-      id
+      id 
+      //propisat vse svoystva goods
     }) {
       const record = state.added.find(p => p.id === id)
 
       if (!record) {
         state.added.push({
+          //zamenit id na product i quantity
           id,
           quantity: 1
         })
@@ -73,7 +73,8 @@ const store = new Vuex.Store({
       commit
     }, product) {
       commit(types.ADD_TO_CART, {
-        id: product.id
+        id: product 
+        //dobalvyaem polnostyu product
       })
     }
   },
