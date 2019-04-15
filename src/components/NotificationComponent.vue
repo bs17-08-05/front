@@ -12,8 +12,7 @@ export default {
     socket.addEventListener("message", function(event) {
       vm.$notify({
         group: "courier",
-        title: "New order",
-        text: event.data
+        title: "New order!",
       });
       console.log(event.data);
     });
