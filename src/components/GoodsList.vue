@@ -74,12 +74,15 @@ export default {
   created: function() {
     let back_url = this.$store.getters.getBackUrl;
     this.$http.get(back_url + this.api_url).then(
-            function(response) {
+            function (response) {
               this.goods = response.body.data;
             },
-            function(error) {
+            function (error) {
               console.log(response);
               //error
             }
     );
+    },
+  },
+}
 </script>
