@@ -15,7 +15,7 @@
             type="password"
             :rules="[rules.required]"
           ></v-text-field>
-          <v-btn @click="signup()" style="color: #388E3C">Sing up</v-btn>
+          <v-btn @click="signup" style="color: #388E3C">Sing up</v-btn>
           <a @click="$router.push('/signin')">Have account?</a>
         </v-form>
       </v-container>
