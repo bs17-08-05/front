@@ -30,10 +30,20 @@ const store = new Vuex.Store({
     horecamaId: 0,
     goodId: 0,
     all: [{
-      id: '',
-      name: '',
-      description: '',
-      price: 399
+      id: 1,
+      photo_url:
+        "http://s5.favim.com/orig/74/beautiful-blue-burger-cake-Favim.com-751982.jpg",
+      price: 350,
+      description: "Amazing burger",
+      name: "Beef Burger",
+    },
+    {
+      id: 2,
+      photo_url:
+        "https://leeds-list.com/wp-content/uploads/2013/09/Beer_tasting_heading-web.jpg",
+      price: 400,
+      description: "Delicios beer",
+      name: "State Ladder"
     }]
   },
   mutations: {
@@ -41,6 +51,7 @@ const store = new Vuex.Store({
       id 
       //propisat vse svoystva goods
     }) {
+      console.log(id);
       const record = state.added.find(p => p.id === id)
 
       if (!record) {
@@ -72,10 +83,19 @@ const store = new Vuex.Store({
     addToCart({
       commit
     }, product) {
-      commit(types.ADD_TO_CART, {
-        id: product 
-        //dobalvyaem polnostyu product
-      })
+      commit(types.ADD_TO_CART, product);
+    },
+    getAllGoods(context) {
+      let back_url = this.$store.getters.getBackUrl;
+      this.$http.get(back_url + this.api_url).then(
+        function(response) {
+          context.state.all = response.body.data;
+        },
+        function(error) {
+          console.log(response);
+          //error
+        }
+      );
     }
   },
   getters: {
@@ -87,7 +107,10 @@ const store = new Vuex.Store({
         quantity
       }) => {
         const product = state.all.find(p => p.id === id)
-
+        if(product === undefined) {
+          console.error(id, state.all);
+          return {};
+        }
         return {
           name: product.name,
           price: product.price,

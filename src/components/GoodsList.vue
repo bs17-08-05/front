@@ -54,36 +54,18 @@ export default {
   data() {
     return {
       cart: [
-        {
+        /*{
           id: "",
           price: "",
           name: ""
-        }
+        }*/
       ],
       api_url: "/api/goods/" + this.$route.params.id + "/",
       self_id: this.$route.params.id,
       photo_prefix: this.$store.getters.getMediaUrl,
-      goods: [
-        {
-          id: 1,
-          photo_url:
-            "http://s5.favim.com/orig/74/beautiful-blue-burger-cake-Favim.com-751982.jpg",
-          price: 350,
-          description: "Amazing burger",
-          name: "Beef Burger"
-        },
-        {
-          id: 2,
-          photo_url:
-            "https://leeds-list.com/wp-content/uploads/2013/09/Beer_tasting_heading-web.jpg",
-          price: 400,
-          description: "Delicios beer",
-          name: "State Ladder"
-        }
-      ]
     };
   },
-  computed: mapGetters({
+  computed: {...mapGetters({
     products: "allProducts",
     length: "getNumberOfProducts"
   }),
@@ -100,6 +82,4 @@ export default {
               //error
             }
     );
-  }
-};
 </script>
