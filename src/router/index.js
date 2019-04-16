@@ -35,12 +35,14 @@ const routes = [{
         component: Signup
     },
     {
+        path: '/feedbacks/:id',
+        component: HorecamaFeedbacks
+    },
+    {
         path: '/*',
         component: NotFound
-
-    }
-
-]
+    },
+];
 export default new VueRouter({
     mode: 'history',
     routes

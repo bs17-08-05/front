@@ -8,6 +8,7 @@
       <v-list v-for="(item,index) in horecamas" :key="index">
         <v-container row>
           <v-flex xs6>
+            <router-link :to="'/goodslist/' + item.pk">
             <v-hover>
               <v-card
                 slot-scope="{ hover }"
@@ -43,6 +44,7 @@
                 </v-card-title>
               </v-card>
             </v-hover>
+            </router-link>
           </v-flex>
         </v-container>
       </v-list>
@@ -84,10 +86,6 @@ export default {
           //error
         }
       );
-    },
-    view_menu: function(id) {
-      this.$parent.state = 1;
-      this.$parent.horecama_id = id;
     },
   },
   created: function() {

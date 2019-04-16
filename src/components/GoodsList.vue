@@ -1,7 +1,14 @@
 <template>
   <div>
+
+    <router-link :to="'/feedbacks/' + self_id">
+      <v-btn flat style="color: #388E3C">Feedbacks</v-btn>
+    </router-link>
+
     <v-layout>
       <v-flex v-for="(item,index) in goods" v-bind:key="index" xs12 sm2 offset-sm1>
+
+
         <v-card>
           <v-img
             class="white--text"
@@ -54,6 +61,7 @@ export default {
         }
       ],
       api_url: "/api/goods/" + this.$route.params.id + "/",
+      self_id: this.$route.params.id,
       photo_prefix: this.$store.getters.getMediaUrl,
       goods: [
         {
@@ -80,21 +88,18 @@ export default {
     length: "getNumberOfProducts"
   }),
   methods: mapActions(["addToCart"]),
-  getAllGoods: function() {
-    let back_url = this.$store.getters.getBackUrl;
-    this.$http.get(back_url + this.api_url).then(
-      function(response) {
-        this.goods = response.body.data;
-      },
-      function(error) {
-        console.log(response);
-        //error
-      }
-    );
-  },
 
   created: function() {
-    this.getAllGoods();
+    let back_url = this.$store.getters.getBackUrl;
+    this.$http.get(back_url + this.api_url).then(
+            function(response) {
+              this.goods = response.body.data;
+            },
+            function(error) {
+              console.log(response);
+              //error
+            }
+    );
   }
 };
 </script>
