@@ -4,6 +4,10 @@
       <v-flex xs12 sm6 offset-sm3></v-flex>
     </v-layout>
 
+    <router-link :to="'/couriers/'">
+      <v-btn flat style="color: #388E3C">Test couriers Info</v-btn>
+    </router-link>
+
     <v-container grid-list-md text-xs-left>
       <v-list v-for="(item,index) in horecamas" :key="index">
         <v-container row>

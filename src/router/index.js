@@ -10,6 +10,7 @@ import Cart from "../components/Cart.vue";
 
 import Vue from "vue";
 import VueRouter from 'vue-router';
+import CouriersInfo from "@/components/CouriersInfo";
 
 Vue.use(VueRouter);
 const routes = [{
@@ -37,6 +38,10 @@ const routes = [{
     {
         path: '/feedbacks/:id',
         component: HorecamaFeedbacks
+    },
+    {
+        path: '/couriers/',
+        component: CouriersInfo
     },
     {
         path: '/*',
