@@ -10,7 +10,6 @@
 
     <v-container grid-list-md text-xs-left>
       <v-list v-for="(item,index) in horecamas" :key="index">
-        <v-container row>
           <v-flex xs6>
             <router-link :to="'/goodslist/' + item.pk">
             <v-hover>
@@ -50,7 +49,6 @@
             </v-hover>
             </router-link>
           </v-flex>
-        </v-container>
       </v-list>
     </v-container>
   </v-container>
