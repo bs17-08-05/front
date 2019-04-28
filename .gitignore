@@ -3,3 +3,4 @@ dist/static/main/js
 .idea
 config.js
 package-lock.json
+.vscode
