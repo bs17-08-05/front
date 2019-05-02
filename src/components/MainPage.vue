@@ -19,7 +19,7 @@
                 class="mx-auto"
                 width="344"
               >
-                <v-img :aspect-ratio="16/9" :src="item.photo_url"></v-img>
+                <v-img :aspect-ratio="16/9" :src="photo_prefix + item.photo_url"></v-img>
                 <v-card-title>
                   <div>
                     <span class="headline">{{item.name}}</span>

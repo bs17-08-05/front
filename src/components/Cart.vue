@@ -40,23 +40,29 @@
             </tr>
           </tbody>
         </table>
-        <p>
-          <v-btn
-            v-show="products.length"
-            class="button is-primary"
-            v-on:click="checkout; snackbar=true "
-          >Checkout</v-btn>
-          <v-snackbar
-            v-model="snackbar"
-            :color="color"
-            :multi-line="mode === 'multi-line'"
-            :timeout="timeout"
-            :vertical="mode === 'vertical'"
-          >
-            {{ text }}
-            <v-btn dark flat @click="snackbar = false">Close</v-btn>
-          </v-snackbar>
-        </p>
+
+        <v-form>
+          <v-text-field v-model="user_name" label="Name" required></v-text-field>
+          <v-text-field v-model="user_phone" label="Phone" required></v-text-field>
+          <v-text-field v-model="address" label="Address" required></v-text-field>
+          <p>
+            <v-btn
+              v-show="products.length"
+              class="button is-primary"
+              v-on:click="checkout()"
+            >Checkout</v-btn>
+            <v-snackbar
+              v-model="snackbar"
+              :color="color"
+              :multi-line="mode === 'multi-line'"
+              :timeout="timeout"
+              :vertical="mode === 'vertical'"
+            >
+              {{ text }}
+              <v-btn dark flat @click="snackbar = false">Close</v-btn>
+            </v-snackbar>
+          </p>
+        </v-form>
       </div>
     </v-card>
   </v-layout>
@@ -69,10 +75,13 @@ export default {
   data() {
     return {
       snackbar: false,
-      color: 'success',
+      color: "success",
       mode: "",
       timeout: 6000,
-      text: "Your order is reviewed.. Is taken by Vladimir Alexiev"
+      text: "Your order is reviewed.. Whait for call",
+      user_name: "",
+      user_phone: "",
+      address: ""
     };
   },
   headers: [
@@ -97,19 +106,20 @@ export default {
   },
   methods: {
     checkout() {
-      console.log(axios);
-      return 0;
-      var url = "http://127.0.0.1:8000/api/order/";
+      var url = this.$store.getters.getBackUrl + "/api/order/";
       var data = {
-        user_name: "test",
-        user_phone: "+79393809899",
-        address: "test",
-        goods: [{ id: 3, quantity: 3 }]
+        user_name: this.user_name,
+        user_phone: this.user_phone,
+        address: this.address,
+        goods: this.products
       };
+      console.log(data);
       var config = { headers: { "Content-Type": "application/json" } };
       axios.post(url, data, config).then(Response => {
-        console.log("Data sent");
         console.log(Response);
+        if (Response.status == 200) {
+          this.snackbar = true;
+        }
       });
     }
   }

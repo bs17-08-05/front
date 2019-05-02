@@ -48,16 +48,15 @@ const store = new Vuex.Store({
   },
   mutations: {
     [types.ADD_TO_CART](state, {
-      id 
-      //propisat vse svoystva goods
+      id, name, price
     }) {
-      console.log(id);
       const record = state.added.find(p => p.id === id)
 
       if (!record) {
         state.added.push({
-          //zamenit id na product i quantity
           id,
+          name,
+          price,
           quantity: 1
         })
       } else {
@@ -106,15 +105,16 @@ const store = new Vuex.Store({
         id,
         quantity
       }) => {
-        const product = state.all.find(p => p.id === id)
+        const product = state.added.find(p => p.id === id)
         if(product === undefined) {
           console.error(id, state.all);
           return {};
         }
         return {
+          id: product.id,
           name: product.name,
           price: product.price,
-          quantity
+          quantity: quantity
         }
       })
     },
