@@ -6,7 +6,7 @@
     </router-link>
     <v-container>
       <v-layout row wrap>
-        <v-flex xs12 sm6 md4 lg3 style="padding: 1rem" v-for="(item,index) in goods" v-bind:key="index" >
+        <v-flex xs12 sm6 md4 lg3 style="padding: 1rem;" v-for="(item,index) in goods" v-bind:key="index" >
 
 
           <v-card>
@@ -17,7 +17,7 @@
               :alt="item.name"
             >
             </v-img>
-            <v-card-title style="padding-bottom: 4px !important;">
+            <v-card-title style="padding-bottom: 4px !important; height: 130px; overflow: hidden;">
               <div>
                 <span style="font-size: 2em">{{item.name}}</span>
                 <br>
