@@ -10,7 +10,7 @@
 
     <v-container grid-list-md text-xs-left>
       <v-layout row wrap>
-          <v-flex style="padding: 1.5%" xs12 md6 lg4 sm v-for="(item,index) in horecamas" :key="index">
+          <v-flex style="padding: 1rem" xs12 md4 lg3 sm v-for="(item,index) in horecamas" :key="index">
             <router-link :to="'/goodslist/' + item.pk">
             <v-hover>
               <v-card
