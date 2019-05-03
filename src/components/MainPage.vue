@@ -9,15 +9,14 @@
     </router-link>
 
     <v-container grid-list-md text-xs-left>
-      <v-list v-for="(item,index) in horecamas" :key="index">
-          <v-flex xs6>
+      <v-layout row wrap>
+          <v-flex style="padding: 1.5%" xs12 md6 lg4 sm v-for="(item,index) in horecamas" :key="index">
             <router-link :to="'/goodslist/' + item.pk">
             <v-hover>
               <v-card
                 slot-scope="{ hover }"
                 :class="`elevation-${hover ? 12 : 2}`"
                 class="mx-auto"
-                width="344"
               >
                 <v-img :aspect-ratio="16/9" :src="photo_prefix + item.photo_url"></v-img>
                 <v-card-title>
@@ -49,7 +48,7 @@
             </v-hover>
             </router-link>
           </v-flex>
-      </v-list>
+      </v-layout>
     </v-container>
   </v-container>
 </template>
@@ -71,7 +70,52 @@ export default {
           address: "BAR108",
           rating: 4.3,
           reviews: 124
-        }
+        },
+        {
+          type: "R",
+          pk: 2,
+          name: "BAR108",
+          description: "Good beer and fresh burgers",
+          photo_url:
+                  "https://fastly.4sqi.net/img/general/600x600/21727973_rM2g1eM5ezQUeah2jy8MlMFbSndkyEeUN3xiZ1QH7CI.jpg",
+          address: "BAR108",
+          rating: 4.3,
+          reviews: 124
+        },
+        {
+          type: "R",
+          pk: 3,
+          name: "BAR108",
+          description: "Good beer and fresh burgers",
+          photo_url:
+                  "https://fastly.4sqi.net/img/general/600x600/21727973_rM2g1eM5ezQUeah2jy8MlMFbSndkyEeUN3xiZ1QH7CI.jpg",
+          address: "BAR108",
+          rating: 4.3,
+          reviews: 124
+        },
+        {
+          type: "R",
+          pk: 4,
+          name: "BAR108",
+          description: "Good beer and fresh burgers",
+          photo_url:
+                  "https://fastly.4sqi.net/img/general/600x600/21727973_rM2g1eM5ezQUeah2jy8MlMFbSndkyEeUN3xiZ1QH7CI.jpg",
+          address: "BAR108",
+          rating: 4.3,
+          reviews: 124
+        },
+        {
+          type: "R",
+          pk: 5,
+          name: "BAR108",
+          description: "Good beer and fresh burgers",
+          photo_url:
+                  "https://fastly.4sqi.net/img/general/600x600/21727973_rM2g1eM5ezQUeah2jy8MlMFbSndkyEeUN3xiZ1QH7CI.jpg",
+          address: "BAR108",
+          rating: 4.3,
+          reviews: 124
+        },
+
       ],
       photo_prefix: this.$store.getters.getMediaUrl,
     };
