@@ -1,6 +1,5 @@
 <template>
     <div>
-        <button class="btn btn-info" @click="back">Back</button>
         <ul id="list" style="list-style: none;">
             <li v-for="item in feedbacks" class="feedbacks">
                 <div class="feedback_info">
@@ -31,8 +30,9 @@
     export default {
         data() {
             let configs = this.$parent.configs;
+            let BACKEND_URL = this.$store.getters.getBackUrl;
             return {
-                api_url: configs.BACKEND_URL + "/api/horecama_feedbacks/" + this.$parent.horecama_id + "/",
+                api_url: BACKEND_URL + "/api/horecama_feedbacks/" + this.$parent.horecama_id + "/",
                 configs: configs,
                 feedbacks: [
                     {
@@ -58,14 +58,13 @@
         },
         methods: {
             getAllFeedbacks: function() {
-                console.log(this.$parent.horecama_id);
                 this.$http.get(this.api_url).then(
                     function(response) {
                         console.log(response);
                         this.feedbacks = response.body.data;
                     },
                     function(error) {
-                        console.log(response);
+                        console.log(error);
                         //error
                     }
                 );
