@@ -16,7 +16,7 @@
               >
                 <v-img :aspect-ratio="16/9" :src="photo_prefix + item.photo_url"></v-img>
                 <v-card-title>
-                  <div>
+                  <div style="height: 130px; overflow: hidden;">
                     <span class="headline">{{item.name}}</span>
                     <div class="d-flex">
                       <v-rating
